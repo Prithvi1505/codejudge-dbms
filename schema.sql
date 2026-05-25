@@ -1,10 +1,50 @@
+-- =============================================
 -- CodeJudge Database Schema - Part 1
---Relational Design, Keys & Normalization
-
+-- Includes Raw Staging + Clean Relational Schema
+-- =============================================
 
 DROP DATABASE IF EXISTS codejudge_db;
 CREATE DATABASE codejudge_db;
 USE codejudge_db;
+
+-- ========================
+-- RAW / STAGING TABLES
+-- ========================
+-- These will hold the original dirty data from CSVs
+
+CREATE TABLE raw_students (
+    student_id TEXT, roll_number TEXT, full_name TEXT, email TEXT, 
+    batch_id TEXT, admission_date TEXT, enrollment_status TEXT, 
+    graduation_year TEXT
+);
+
+CREATE TABLE raw_batches (
+    batch_id TEXT, batch_code TEXT, program TEXT, start_date TEXT, 
+    end_date TEXT
+);
+
+CREATE TABLE raw_submissions (
+    submission_id TEXT, student_id TEXT, problem_id TEXT, contest_id TEXT,
+    language TEXT, submission_time TEXT, verdict TEXT, score TEXT
+);
+
+CREATE TABLE raw_problems (
+    problem_id TEXT, problem_code TEXT, title TEXT, difficulty TEXT, course_id TEXT
+);
+
+CREATE TABLE raw_courses (
+    course_id TEXT, course_code TEXT, course_title TEXT, credit_hours TEXT
+);
+
+CREATE TABLE raw_contests (
+    contest_id TEXT, contest_name TEXT, start_time TEXT, end_time TEXT
+);
+
+-- Add more raw tables as needed (enrollments, attendance, etc.)
+
+-- ========================
+-- CLEAN RELATIONAL SCHEMA
+-- ========================
 
 -- 1. Batches
 CREATE TABLE batches (
@@ -27,7 +67,6 @@ CREATE TABLE students (
     enrollment_status ENUM('active', 'inactive', 'graduated', 'dropped') NOT NULL,
     graduation_year YEAR,
     FOREIGN KEY (batch_id) REFERENCES batches(batch_id)
-        ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- 3. Courses
@@ -38,7 +77,6 @@ CREATE TABLE courses (
     credit_hours INT CHECK (credit_hours BETWEEN 1 AND 6),
     course_status ENUM('active', 'archived') DEFAULT 'active'
 );
-
 -- 4. Enrollments (Junction Table)
 CREATE TABLE enrollments (
     enrollment_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,17 +89,15 @@ CREATE TABLE enrollments (
     FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE RESTRICT,
     UNIQUE KEY unique_enrollment (student_id, course_id)
 );
-
 -- 5. Problems
 CREATE TABLE problems (
     problem_id VARCHAR(10) PRIMARY KEY,
     problem_code VARCHAR(20) UNIQUE NOT NULL,
     title VARCHAR(200) NOT NULL,
-    difficulty ENUM('Easy', 'Medium', 'Hard') NOT NULL,
+    difficulty ENUM('Easy', 'Medium', 'Hard'),
     course_id VARCHAR(10),
     FOREIGN KEY (course_id) REFERENCES courses(course_id)
 );
-
 -- 6. Contests
 CREATE TABLE contests (
     contest_id VARCHAR(10) PRIMARY KEY,
@@ -70,7 +106,6 @@ CREATE TABLE contests (
     end_time DATETIME NOT NULL,
     contest_status ENUM('upcoming', 'ongoing', 'completed') DEFAULT 'upcoming'
 );
-
 -- 7. Contest Problems (Mapping)
 CREATE TABLE contest_problems (
     contest_id VARCHAR(10) NOT NULL,
@@ -79,8 +114,7 @@ CREATE TABLE contest_problems (
     FOREIGN KEY (contest_id) REFERENCES contests(contest_id),
     FOREIGN KEY (problem_id) REFERENCES problems(problem_id)
 );
-
--- 8. Submissions
+-- 8.Submissions
 CREATE TABLE submissions (
     submission_id VARCHAR(20) PRIMARY KEY,
     student_id VARCHAR(10) NOT NULL,
@@ -88,14 +122,11 @@ CREATE TABLE submissions (
     contest_id VARCHAR(10),
     language VARCHAR(20) NOT NULL,
     submission_time DATETIME NOT NULL,
-    verdict ENUM('Accepted', 'Wrong Answer', 'Runtime Error', 'Time Limit Exceeded', 
-                'Compilation Error', 'Memory Limit Exceeded') NOT NULL,
+    verdict VARCHAR(50) NOT NULL,
     score INT DEFAULT 0,
     FOREIGN KEY (student_id) REFERENCES students(student_id),
-    FOREIGN KEY (problem_id) REFERENCES problems(problem_id),
-    FOREIGN KEY (contest_id) REFERENCES contests(contest_id)
+    FOREIGN KEY (problem_id) REFERENCES problems(problem_id)
 );
-
 -- 9. Test Cases
 CREATE TABLE test_cases (
     test_case_id VARCHAR(15) PRIMARY KEY,
@@ -105,7 +136,6 @@ CREATE TABLE test_cases (
     is_hidden BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (problem_id) REFERENCES problems(problem_id)
 );
-
 -- 10. Test Results
 CREATE TABLE test_results (
     result_id INT AUTO_INCREMENT PRIMARY KEY,
