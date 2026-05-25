@@ -147,6 +147,3 @@ As mentioned in the assignment, the raw CSV files contain inconsistent and dirty
 6. **Staging Tables Strategy**:
    - We will create raw tables with all columns as TEXT to import dirty data safely.
    - Then use INSERT...SELECT with cleaning logic to move data into clean tables.
-
-## Why This Approach?
-This follows the assignment guideline of not editing original CSVs directly and handling inconsistent records properly.
