@@ -24,3 +24,17 @@ This repository contains the solution for **Part 1** of the SQL & DBMS Assignmen
 ## How to Run
 ```sql
 -- Run schema.sql in MySQL / PostgreSQL
+
+
+
+## Part 2: SQL Query Implementation & Verification [20 Marks]
+- `queries.sql` → All 20 SQL queries
+- `query_outputs.md` → Sample outputs and validation notes
+- `sql_reasoning.md` → Explanations for JOINs, HAVING, Subqueries, etc.
+
+---
+
+## How to Use
+1. Run `schema.sql` to create the database.
+2. Import data from raw CSVs into staging tables.
+3. Run queries from `queries.sql`.
