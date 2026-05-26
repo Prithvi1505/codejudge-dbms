@@ -20,11 +20,6 @@ This repository contains the solution for **Part 1** of the SQL & DBMS Assignmen
 - **Raw/Staging tables** to handle messy CSV data safely
 - Clean relational schema in **3NF**
 - Clear documentation for all tasks
-
-## How to Run
-```sql
--- Run schema.sql in MySQL / PostgreSQL
-
 ---
 
 ## Part 2: SQL Query Implementation & Verification [20 Marks]
