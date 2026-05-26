@@ -25,7 +25,7 @@ This repository contains the solution for **Part 1** of the SQL & DBMS Assignmen
 ```sql
 -- Run schema.sql in MySQL / PostgreSQL
 
-
+---
 
 ## Part 2: SQL Query Implementation & Verification [20 Marks]
 - `queries.sql` → All 20 SQL queries
