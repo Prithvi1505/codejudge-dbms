@@ -33,3 +33,20 @@ This repository contains the solution for **Part 1** of the SQL & DBMS Assignmen
 1. Run `schema.sql` to create the database.
 2. Import data from raw CSVs into staging tables.
 3. Run queries from `queries.sql`.
+
+
+## Part 3: Data Integrity Audit, Debugging & Repair [25 Marks]
+- `import_validation.sql`
+- `integrity_audit.sql`
+- `domain_rule_checks.sql`
+- `repair_plan.md`
+- `staging_repair_scripts.sql`
+- `before_after_evidence.md`
+
+**Key Highlights of Part 3:**
+- Performed full data audit (row counts, PK uniqueness, FK integrity, domain rules)
+- Identified real issues (invalid emails, wrong batch_id, status typos, etc.)
+- Created safe repair scripts on staging tables only
+- Provided before/after evidence
+
+---
