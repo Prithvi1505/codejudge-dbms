@@ -12,7 +12,7 @@ SAVEPOINT before_score_update;
 UPDATE raw_submissions SET score = 9999 WHERE student_id = 'S0001';
 ROLLBACK TO SAVEPOINT before_score_update;
 COMMIT;
-
+---
 ACID Properties Explained
 1. Atomicity (All or Nothing)
 
