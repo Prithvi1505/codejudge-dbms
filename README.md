@@ -50,3 +50,38 @@ This repository contains the solution for **Part 1** of the SQL & DBMS Assignmen
 - Provided before/after evidence
 
 ---
+
+# CodeJudge DBMS Assignment - Final Submission
+
+## Repository Overview
+This repository contains complete solutions for **All 4 Parts** of the SQL & DBMS Assignment.
+
+---
+
+## ✅ Part 1: Relational Design, Keys & Normalization [30 Marks]
+- Schema design with raw + clean tables
+- Full documentation and ERD
+
+## ✅ Part 2: SQL Query Implementation [20 Marks]
+- 20 SQL queries
+- Output validation and reasoning
+
+## ✅ Part 3: Data Integrity Audit & Repair [25 Marks]
+- Import validation, audits, repair plan & scripts
+
+## ✅ Part 4: Transactions, Safe Changes & DB Reliability [25 Marks]
+- `safe_updates.sql`
+- `safe_deletes.sql`
+- `transactions.sql`
+- `acid_explanation.md`
+- `incident_note.md`
+
+---
+
+**All work done safely on staging tables.  
+Transactions, Rollback, and ACID properties demonstrated.**
+
+**Repository Link:**  
+https://github.com/Prithvi1505/codejudge-dbms
+
+**Status: All Parts Completed** ✅
