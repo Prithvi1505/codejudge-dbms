@@ -25,7 +25,7 @@ How Transactions / Rollback Could Help:
 If the operation was wrapped in a START TRANSACTION, the developer could immediately run ROLLBACK; to undo the damage.
 Using SAVEPOINT before risky operations would allow partial recovery.
 
-Preventive Measures (Best Practices):
+Preventive Measures:
 
 Always test UPDATE/DELETE on a small subset first (LIMIT 5 or specific student_id).
 Always include a WHERE clause.
